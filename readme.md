@@ -1,8 +1,8 @@
-## Woah!! A wild interface just popped up.
-## Hope you brought pizza!
-### Welcome to thecord.py
-#### Basically discord.py but with Slash command support, Only You can see this message support, Button Support, ect ect
-#### Wow!!!! This seems easy! well it is.
-#### All you gotta do is...
+## 🐾 Woah!! A wild interface just popped up. Hope you brought pizza! 🍕
+
+#### Welcome to thecord.py - the ultimate Discord library for Python. It's like Discord.py, but with added features like Slash command support, Only You can see this message support, Button Support, and more! 🤯
+
+#### Wow!!!! This seems easy! And it is! 🎉
+#### Here is all you have to do! 🎊
 `@slash-command Name: 'Test' Description: 'test' (ctx) when run ctx.send.message="hello from the mother ship."`
 # UNDER DEVELOPMENT
