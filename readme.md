@@ -4,6 +4,7 @@
 
 #### Wow!!!! This seems easy! And it is! 🎉
 #### Here is all you have to do! 🎊
+[![Crowdin](https://badges.crowdin.net/thecord_python/localized.svg)](https://crowdin.com/project/thecord_python)
 `@slash-command Name: 'Test' Description: 'test' (ctx) when run ctx.send.message="hello from the mother ship."`
 # UNDER DEVELOPMENT
 ## ℹ See disclaimer.md to see all legal info
