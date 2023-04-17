@@ -1,28 +1,38 @@
-# mypackage/__init__.py
-'''
+import discord
+from discord.ext import commands
 
+class MyClient(discord.Client):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.command_prefix = '!'
+        self.my_data = {}
 
-MIT License
+        @self.event
+        async def on_ready():
+            print(f'Logged in as {self.user.name} ({self.user.id})')
 
-Copyright (c) 2023 Daniel
+        @self.event
+        async def on_message(message):
+            if message.author.bot:
+                return
+            if message.content.startswith(self.command_prefix):
+                await self.process_commands(message)
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+    def add_data(self, key, value):
+        self.my_data[key] = value
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+    def get_data(self, key):
+        return self.my_data.get(key)
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-'''
-from . import mymodule1
-__all__ = ["mymodule1"]
+client = MyClient()
+
+def setup(bot: commands.Bot):
+    bot.add_cog(MyCog(bot))
+
+class MyCog(commands.Cog):
+    def __init__(self, bot: commands.Bot):
+        self.bot = bot
+
+    @commands.command()
+    async def my_command(self, ctx: commands.Context):
+        await ctx.send(f'The prefix is {self.bot.command_prefix}')
